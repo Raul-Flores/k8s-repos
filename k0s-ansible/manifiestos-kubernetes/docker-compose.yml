@@ -1,0 +1,40 @@
+version: '3'
+services:
+#######################################
+### Demo APP ####
+#######################################
+    db:
+      container_name: postgresdb
+      image: postgres:alpine
+      volumes:
+        - dbdata:/var/lib/postgresql/data
+        - dbbackup:/backups
+      expose:
+        - 5432
+      ports: 
+        - 5432:5432
+      healthcheck:
+        test: "pg_isready --username=postgres && psql --username=postgres --list"
+        timeout: 10s
+        retries: 20
+      environment:
+        - LC_ALL=C.UTF-8
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=Secret
+        - POSTGRES_DB=gestion
+
+    app:
+      container_name: demoAPI
+      image: eduaraul/fast_api_demo:0.2
+      restart: on-failure
+      expose:
+        - 8010
+      ports: 
+        - 8010:8010
+      command: "python3 main-sql.py"
+
+volumes:
+    dbdata: {}
+    dbbackup: {}
+
+  

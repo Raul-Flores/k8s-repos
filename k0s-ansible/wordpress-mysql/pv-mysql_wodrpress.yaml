@@ -1,0 +1,35 @@
+## PV para Wodpress ##
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: pv-wordpress
+spec:
+ capacity:
+   storage: 20Gi
+ accessModes:
+   - ReadWriteMany
+ persistentVolumeReclaimPolicy: Recycle
+ storageClassName: wordpress
+ nfs:
+   path: /home/kubernetes/datos/wordpress
+   server: 10.1.230.201
+...
+## PV para mysql ##
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: pv-mysql
+spec:
+ capacity:
+   storage: 20Gi
+ accessModes:
+   - ReadWriteMany
+ persistentVolumeReclaimPolicy: Recycle
+ storageClassName: mysql
+ nfs:
+   path: /home/kubernetes/datos/mysql
+   server: 10.1.230.201
+...
+

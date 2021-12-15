@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  containers:
+    - args:
+        - python3
+        - main-sql.py
+      image: eduaraul/fast_api_demo:0.2
+      name: demoapi
+      ports:
+        - containerPort: 8010
+      resources: {}
+  restartPolicy: OnFailure
+status: {}

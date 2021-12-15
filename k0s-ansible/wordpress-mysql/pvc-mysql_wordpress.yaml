@@ -1,0 +1,29 @@
+### CLAIM para Wordpress ####
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-wordpress
+spec:
+  storageClassName: wordpress
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+...
+### CLAIM para MYSQL ####
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-mysql
+spec:
+  storageClassName: mysql
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+...
+
